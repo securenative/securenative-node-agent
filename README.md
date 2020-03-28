@@ -1,5 +1,3 @@
-# [SecureNative](https://www.securenative.com/) Node.JS Agent
-
 <p align="center">
   <a href="https://www.securenative.com"><img src="https://user-images.githubusercontent.com/45174009/77826512-f023ed80-7120-11ea-80e0-58aacde0a84e.png" alt="SecureNative Logo"/></a>
 </p>
@@ -14,8 +12,9 @@
   <a href="https://blog.securenative.com">Blog</a> |
   <a href="">Chat with us on Slack!</a>
 </p>
+<hr/>
 
-SecureNative agent provides application security monitoring and protection from OWASP TOP 10 security threats at run-time through dynamic instrumentation of business logic and user behaviour.
+SecureNative Node.JS agent provides application security monitoring and protection from OWASP TOP 10 security threats at run-time through dynamic instrumentation of business logic and user behaviour.
 
 SecureNative monitors and protects applications from common security threats such as:
 
