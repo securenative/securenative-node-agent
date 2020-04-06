@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <b>A Cloud-Native Security Monitoing and Protection for Modern Applications</b>
+  <b>A Cloud-Native Security Monitoring and Protection for Modern Applications</b>
 </p>
 
 <p align="center">
