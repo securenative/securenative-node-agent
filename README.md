@@ -26,7 +26,6 @@
   <a href="">Chat with us on Slack!</a>
 </p>
 <hr/>
-
 SecureNative Node.JS agent provides application security monitoring and protection from OWASP TOP 10 security threats at run-time through dynamic instrumentation of business logic and user behaviour.
 
 SecureNative monitors and protects applications from common security threats such as:
