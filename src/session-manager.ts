@@ -1,4 +1,6 @@
-import { IncomingMessage, ServerResponse } from "http";
+import { IncomingMessage, ServerResponse } from 'http';
+import { Logger } from './logger';
+import { createNamespace, Namespace } from 'cls-hooked';
 
 export interface Session {
   req: IncomingMessage | any;
@@ -6,19 +8,40 @@ export interface Session {
 }
 
 export default class SessionManager {
-  private static session: Map<string, Session> = new Map<string, Session>();
+  private static stack: Array<Session> = [];
+  private static ns = createNamespace('sn_session');
+  static getLastSession(): Session {
+    const [session = { req: null, res: null }] = SessionManager.stack;
+    return session;
+  }
 
   static getSession(id: string): Session {
-    return SessionManager.session.get(id);
+    return SessionManager.stack.find((s) => s.req.sn_uid === id) || { req: null, res: null };
   }
 
   static setSession(id: string, session: Session) {
+    Logger.debug(`[SessionManager] Setting session: ${id}`);
     session.req.sn_uid = id;
     session.res.sn_uid = id;
-    SessionManager.session.set(id, session);
+    //add session
+    SessionManager.stack.push(session);
   }
 
   static cleanSession(id: string) {
-    SessionManager.session.delete(id);
+    Logger.debug(`[SessionManager] Cleaning session: ${id}`);
+    // delete item
+    const inx = SessionManager.stack.findIndex((s) => s.req.sn_uid === id);
+    if (inx !== -1) {
+      SessionManager.stack.splice(inx, 1);
+    }
+  }
+
+  static cleanAllSessions() {
+    Logger.debug(`[SessionManager] Cleaning all sessions`);
+    SessionManager.stack = [];
+  }
+
+  static getNs(): Namespace {
+    return SessionManager.ns;
   }
 }

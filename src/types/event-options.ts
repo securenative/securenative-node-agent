@@ -1,16 +1,23 @@
-import EventType from "../enums/event-type";
-import { KeyValuePair } from "./key-value-pair";
+import EventType from '../enums/event-type';
+import { IncomingHttpHeaders } from 'http2';
+import { CustomProperties } from './custom-properties';
+
+export type Context = {
+  clientToken?: string;
+  ip?: string;
+  remoteIp?: string;
+  headers?: IncomingHttpHeaders;
+};
 
 export type EventOptions = {
-  ip: string;
-  userAgent: string;
-  eventType?: EventType | string;
-  remoteIp?: string;
-  user?: {
-    id: string;
+  event: EventType | string;
+  userId?: string;
+  userTraits?: {
     name?: string;
     email?: string;
-  }
-  device?: {};
-  params?: Array<KeyValuePair>;
-}
+    createdAt?: Date;
+  };
+  context?: Context;
+  properties?: CustomProperties;
+  timestamp?: Date;
+};

@@ -9,7 +9,7 @@ const PACKAGE_FILE_NAME = 'package.json';
 
 export default class AgentLoginEvent implements IEvent {
   public eventType = EventType.AGENT_LOG_IN;
-  public ts: number;
+  public timestamp: string;
   public package: {
     name: string;
     description: string;
@@ -89,10 +89,10 @@ export default class AgentLoginEvent implements IEvent {
 
     this.agent = {
       type: "Server Agent",
-      version: agentPkg.version,
+      version: agentPkg?.version,
       path: __dirname
     };
 
-    this.ts = Date.now();
+    this.timestamp = new Date().toISOString();
   }
 }

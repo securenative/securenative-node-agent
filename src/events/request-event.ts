@@ -1,33 +1,74 @@
 import IEvent from './event';
-import EventType from '../enums/event-type';
-import { KeyValuePair } from '../types/key-value-pair';
+import { decrypt } from '../utils/utils';
+import { Logger } from '../logger';
+import { v4 } from 'uuid';
+import { SecureNativeOptions } from '../types/securenative-options';
+import { IncomingHttpHeaders, OutgoingHttpHeaders } from 'http2';
 import { RequestOptions } from '../types/request-options';
 
 export default class RequestEvent implements IEvent {
-  ts: number;
-  eventType: string = EventType.RISK;
-  private url: string;
-  private method: string;
-  private userAgent: string;
-  private headers: Array<KeyValuePair>;
-  private body: string;
-  private ip: string;
-  private remoteIp?: string;
-  private fp: string;
-  private cid: string;
-  private vid: string;
+  public rid: string;
+  public eventType: string;
+  public userId: string;
+  public userTraits: {
+    name: string;
+    email: string;
+    createdAt: string;
+  };
+  public request: {
+    cid: string;
+    vid: string;
+    fp: string;
+    ip: string;
+    remoteIp: string;
+    headers: IncomingHttpHeaders;
+    url: string;
+    method: string;
+    body: Object;
+  };
+  public response: {
+    status: number;
+    headers: OutgoingHttpHeaders;
+  };
+  public timestamp: string;
 
-  constructor(opts: RequestOptions) {
-    this.url = opts.url;
-    this.method = opts.url;
-    this.userAgent = opts.userAgent;
-    this.headers = opts.headers;
-    this.body = opts.body;
-    this.ip = opts.ip;
-    this.remoteIp = opts.remoteIp;
-    this.fp = opts.fp;
-    this.cid = opts.cid;
-    this.vid = opts.vid;
-    this.ts = Date.now();
+  constructor(event: RequestOptions, options: SecureNativeOptions) {
+    Logger.debug('Building request event');
+    const reqContext = event.context?.req || {};
+    const resContext = event.context?.res || {};
+    const decryptedToken = decrypt(reqContext?.clientToken, options.apiKey);
+    Logger.debug('Decrypted client token', decryptedToken);
+    const parsedToken = JSON.parse(decryptedToken) || {};
+    Logger.debug('Parsed client token:', parsedToken);
+
+    const user: any = {};
+
+    this.rid = v4();
+    this.eventType = event.event;
+    this.userId = user.userId || '';
+    this.userTraits = {
+      name: user.name || '',
+      email: user.email || '',
+      createdAt: user.createdAt?.toISOString() || new Date(0).toISOString(),
+    };
+
+    this.request = {
+      cid: parsedToken.cid || '',
+      vid: parsedToken.vid || '',
+      fp: parsedToken.fp || '',
+      ip: reqContext.ip || '',
+      remoteIp: reqContext.remoteIp || '',
+      method: reqContext.method || '',
+      url: reqContext.url,
+      body: reqContext.body || '',
+      headers: reqContext.headers || {},
+    };
+
+    this.response = {
+      status: resContext.status || 0,
+      headers: resContext.headers || {},
+    };
+
+    this.timestamp = event.timestamp?.toISOString() || new Date().toISOString();
   }
 }

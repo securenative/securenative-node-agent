@@ -1,14 +1,11 @@
-import { KeyValuePair } from "./key-value-pair";
+import EventType from '../enums/event-type';
+import { RequestContext, ResponseContext } from './request-context';
 
 export type RequestOptions = {
-  url: string;
-  method: string;
-  userAgent: string;
-  headers: Array<KeyValuePair>;
-  body: string;
-  ip: string;
-  remoteIp?: string;
-  fp: string;
-  cid: string;
-  vid: string;
-}
+  event: EventType | string;
+  context: {
+    req?: RequestContext;
+    res?: ResponseContext;
+  }
+  timestamp?: Date;
+};
