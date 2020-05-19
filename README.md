@@ -6,11 +6,11 @@
   <b>A Cloud-Native Security Monitoring and Protection for Modern Applications</b>
 </p>
 <p align="center">
-  <a href="https://github.com/securenative/securenative-node">
-    <img alt="Github Actions" src="https://github.com/securenative/securenative-node/workflows/Build/badge.svg">
+  <a href="https://github.com/securenative/securenative-node-agent">
+    <img alt="Github Actions" src="https://github.com/securenative/securenative-node-agent/workflows/Build/badge.svg">
   </a>
-  <a href="https://codecov.io/gh/securenative/securenative-node">
-    <img src="https://codecov.io/gh/securenative/securenative-node/branch/master/graph/badge.svg" />
+  <a href="https://codecov.io/gh/securenative/securenative-node-agent">
+    <img src="https://codecov.io/gh/securenative/securenative-node-agent/branch/master/graph/badge.svg" />
   </a>
   <a href="https://badge.fury.io/js/%40securenative%2Fsdk">
     <img src="https://badge.fury.io/js/%40securenative%2Fsdk.svg" alt="npm version" height="20">
@@ -64,7 +64,7 @@ EOF
 Add SecureNative as first dependency to your main module
 
 ```js
-require('securenative');
+require("securenative");
 ```
 
 ## Configuration
