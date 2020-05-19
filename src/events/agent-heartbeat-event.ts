@@ -14,7 +14,7 @@ export default class AgentHeartBeatEvent implements IEvent {
   private hostname: string;
   private agentVersion: string;
   private runtime: string;
-  private static agentPkg: Package = PackageManager.getPackage(join(process.cwd(), '/node_modules/@securenative/sdk/', PACKAGE_FILE_NAME));
+  private static agentPkg: Package = PackageManager.getPackage(join(process.cwd(), '/node_modules/@securenative/agent', PACKAGE_FILE_NAME));
 
   constructor(private appName: string) {
     this.timestamp = new Date().toISOString();

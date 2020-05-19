@@ -49,7 +49,7 @@ export default class AgentLoginEvent implements IEvent {
 
   constructor(hostId: string, framework: string, frameworkVersion: string, appName: string) {
     const appPkg: Package = PackageManager.getPackage(join(process.cwd(), PACKAGE_FILE_NAME));
-    const agentPkg: Package = PackageManager.getPackage(join(process.cwd(), '/node_modules/@securenative/sdk/', PACKAGE_FILE_NAME));
+    const agentPkg: Package = PackageManager.getPackage(join(process.cwd(), '/node_modules/@securenative/agent/', PACKAGE_FILE_NAME));
 
     this.package = {
       name: appPkg.name,

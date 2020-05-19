@@ -26,7 +26,7 @@ describe('PackageManager', () => {
     expect(pkg).to.have.property('dependencies');
     expect(pkg).to.have.property('dependenciesHash');
 
-    expect(pkg.name).to.be.eq('@securenative/sdk');
+    expect(pkg.name).to.be.eq('@securenative/agent');
     expect(pkg.dependencies).to.have.length.above(0);
     expect(pkg.dependencies.find((d) => d.key === 'pino')).to.be.not.null;
   });
