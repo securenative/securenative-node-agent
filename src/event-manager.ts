@@ -48,17 +48,18 @@ export default class EventManager {
           "Unauthorized call to SecureNative API, api key is invalid"
         );
         const text = await resp.text();
-        throw new Error(text || resp.statusText);
+        throw new Error(`status: ${resp.status}, response: ${text}`);
       }
       // if response not ok, or without body, we will reject it
       if (!resp.ok) {
         const text = await resp.text();
-        throw new Error(text || resp.statusText);
+        throw new Error(`status: ${resp.status}, response: ${text}`);
       }
       Logger.debug("Successfuly sent event", eventOptions);
       return await resp.json();
     } catch (ex) {
-      Logger.error("Failed to send event", ex);
+      Logger.error(`Failed to send event, ${ex.message}`);
+      Logger.debug(`Full request options: ${JSON.stringify(eventOptions)}`);
       return Promise.reject(ex);
     }
   }
@@ -91,11 +92,14 @@ export default class EventManager {
         }
         if (!resp.ok) {
           const text = await resp.text();
-          throw new Error(text || resp.statusText);
+          throw new Error(`status: ${resp.status}, response: ${text}`);
         }
         Logger.debug("Event successfully sent", fetchEvent);
       } catch (ex) {
-        Logger.error("Failed to send event", ex);
+        Logger.error(`Failed to send event, ${ex.message}`);
+        Logger.debug(
+          `Full request options: ${JSON.stringify(fetchEvent.options)}`
+        );
         if (fetchEvent.retry) {
           this.events.unshift(fetchEvent);
           const backOff = Math.ceil(Math.random() * 10) * this.options.timeout;
