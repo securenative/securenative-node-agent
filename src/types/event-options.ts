@@ -1,6 +1,6 @@
-import EventType from '../enums/event-type';
-import { IncomingHttpHeaders } from 'http2';
-import { CustomProperties } from './custom-properties';
+import EventType from "../enums/event-type";
+import { IncomingHttpHeaders } from "http2";
+import { CustomProperties } from "./custom-properties";
 
 export type Context = {
   clientToken?: string;
@@ -15,6 +15,7 @@ export type EventOptions = {
   userTraits?: {
     name?: string;
     email?: string;
+    phone?: string;
     createdAt?: Date;
   };
   context?: Context;
