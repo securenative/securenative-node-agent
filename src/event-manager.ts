@@ -58,7 +58,7 @@ export default class EventManager {
       Logger.debug("Successfuly sent event", eventOptions);
       return await resp.json();
     } catch (ex) {
-      Logger.error(`Failed to send event, ${ex.message}`);
+      Logger.error(`Failed to send event: ${event.eventType} with: ${ex.message}`);
       Logger.debug(`Full request options: ${JSON.stringify(eventOptions)}`);
       return Promise.reject(ex);
     }

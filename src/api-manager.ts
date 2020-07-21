@@ -123,8 +123,7 @@ export default class ApiManager {
       return res;
     } catch (ex) {
       Logger.warn('Failed to get configurations update', ex);
+      return Promise.reject(null);
     }
-
-    return null;
   }
 }
