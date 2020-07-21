@@ -52,11 +52,13 @@ export default class AgentManager {
       .configurationUpdate(this.configUpdateTs)
       .then((config) => {
         this.handleConfigUpdate(config);
-      })
-      .catch((ex) => {})
-      .finally(() => {
         // scheduale next call
         process.nextTick(this.configurationUpdate.bind(this));
+      })
+      .catch((ex) => {
+        const backOff = Math.ceil(Math.random() * 10) * 1000;
+        Logger.warn('Failed to perform configurationUpdate, will retry after backoff', backOff);
+        setTimeout(() => process.nextTick(this.configurationUpdate.bind(this)), backOff);
       });
   }
 
