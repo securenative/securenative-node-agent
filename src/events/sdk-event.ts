@@ -42,7 +42,7 @@ export default class SDKEvent implements IEvent {
     const reqCtx = mergeRequestContexts(event.context || {}, contextFromRequest(req));
     const decryptedToken = decrypt(reqCtx?.clientToken, options.apiKey);
     Logger.debug('Decrypted client token', decryptedToken);
-    const parsedToken = JSON.parse(decryptedToken) || {};
+    const parsedToken = decryptedToken && JSON.parse(decryptedToken) || {};
     Logger.debug('Parsed client token:', parsedToken);
 
     const user: any = event.userTraits || {};
