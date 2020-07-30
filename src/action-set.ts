@@ -1,5 +1,5 @@
-import { IPSet } from 'futoin-ipset';
-import SetType from './enums/set-type';
+import { IPSet } from "futoin-ipset";
+import SetType from "./enums/set-type";
 
 export class ActionSet {
   private multiSet: Object;
@@ -9,7 +9,7 @@ export class ActionSet {
   }
 
   public add(setType: SetType, item: string, ts?: number, ttl?: number) {
-    const expireTs = (ts && ttl !== -1) ? ts + ttl * 1000 : -1;
+    const expireTs = ts && ttl !== -1 ? ts + ttl * 1000 : -1;
     const set = this.getSet(setType);
 
     if (setType === SetType.IP) {
@@ -68,7 +68,7 @@ export class ActionSet {
       ip: new IPSet(),
       path: new Map<string, Number>(),
       user: new Map<string, Number>(),
-      country: new Map<string, Number>()
+      country: new Map<string, Number>(),
     };
   }
 
@@ -102,7 +102,7 @@ export class ActionSet {
 
       for (let [sub, m] of set._v6._pm) {
         for (let key of m.keys()) {
-          set.has(key + "/" + sub);
+          this.has(setType, key + "/" + sub);
         }
       }
     } else {
