@@ -156,8 +156,9 @@ const fromEntries = (iterable) => {
 const getDeviceFp = (req, options) => {
   const cookie = cookieValueFromRequest(req, '_sn') || secureheaderFromRequest(req) || '{}';
   const cookieDecoded = decrypt(cookie, options.apiKey);
-  const clientFP = JSON.parse(cookieDecoded) || {};
-  return clientFP.fp || '';
+  const parsedToken = JSON.parse(cookieDecoded) || {};
+  const clientFp = parsedToken.fp || '';
+  return clientFp.split('.')[1] || '';
 };
 
 const promiseTimeout = (promise, ms) => {
