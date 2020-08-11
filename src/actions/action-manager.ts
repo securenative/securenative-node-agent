@@ -4,7 +4,10 @@ import Action from './action';
 const ActionProcessors = {
   'block_ip': [processors.BlacklistIp],
   'unblock_ip': [processors.DeleteBlacklistedIp],
-  'allow_ip': [processors.WhitelistIp]
+  'block_fp': [processors.BlacklistDevice],
+  'unblock_fp': [processors.DeleteBlacklistedDevice],
+  'allow_ip': [processors.WhitelistIp],
+  'allow_fp': [processors.WhitelistDevice],
 };
 
 export default class ActionManager {

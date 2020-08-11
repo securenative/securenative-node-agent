@@ -67,7 +67,7 @@ export class ActionSet {
     this.multiSet = {
       ip: new IPSet(),
       path: new Map<string, Number>(),
-      user: new Map<string, Number>(),
+      device: new Map<string, Number>(),
       country: new Map<string, Number>(),
     };
   }

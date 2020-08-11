@@ -42,11 +42,11 @@ describe('ActionSet Tests', () => {
 
 
     this.actionSet.add(SetType.IP, ip);
-    this.actionSet.add(SetType.USER, user);
+    this.actionSet.add(SetType.Device, user);
     this.actionSet.add(SetType.COUNTRY, country);
 
     expect(this.actionSet.has(SetType.IP, ip)).to.be.true;
-    expect(this.actionSet.has(SetType.USER, user)).to.be.true;
+    expect(this.actionSet.has(SetType.Device, user)).to.be.true;
     expect(this.actionSet.has(SetType.COUNTRY, country)).to.be.true;
   });
 
@@ -57,12 +57,12 @@ describe('ActionSet Tests', () => {
     const timeout = 2000;
 
     this.actionSet.add(SetType.IP, ip, Date.now(), timeout / 1000);
-    this.actionSet.add(SetType.USER, user, Date.now(), timeout / 1000);
+    this.actionSet.add(SetType.Device, user, Date.now(), timeout / 1000);
     this.actionSet.add(SetType.COUNTRY, country, Date.now(), timeout / 1000);
 
     setTimeout(() => {
       expect(this.actionSet.has(SetType.IP, ip)).to.be.false;
-      expect(this.actionSet.has(SetType.USER, user)).to.be.false;
+      expect(this.actionSet.has(SetType.Device, user)).to.be.false;
       expect(this.actionSet.has(SetType.COUNTRY, country)).to.be.false;
       done();
     }, timeout);
@@ -88,12 +88,12 @@ describe('ActionSet Tests', () => {
     const user2 = "333333";
     const timeout = 2000;
 
-    this.actionSet.add(SetType.USER, user, Date.now(), 1);
-    this.actionSet.add(SetType.USER, user2, Date.now(), 10);
+    this.actionSet.add(SetType.Device, user, Date.now(), 1);
+    this.actionSet.add(SetType.Device, user2, Date.now(), 10);
 
     setTimeout(() => {
-      expect(this.actionSet.has(SetType.USER, user)).to.be.false;
-      expect(this.actionSet.has(SetType.USER, user2)).to.be.true;
+      expect(this.actionSet.has(SetType.Device, user)).to.be.false;
+      expect(this.actionSet.has(SetType.Device, user2)).to.be.true;
       done();
     }, timeout);
   }).timeout(2100);
@@ -121,11 +121,11 @@ describe('ActionSet Tests', () => {
     const country = "US";
 
     this.actionSet.delete(SetType.IP, ip);
-    this.actionSet.delete(SetType.USER, user);
+    this.actionSet.delete(SetType.Device, user);
     this.actionSet.delete(SetType.COUNTRY, country);
 
     expect(this.actionSet.has(SetType.IP, ip)).to.be.false;
-    expect(this.actionSet.has(SetType.USER, user)).to.be.false;
+    expect(this.actionSet.has(SetType.Device, user)).to.be.false;
     expect(this.actionSet.has(SetType.COUNTRY, country)).to.be.false;
   });
 });
