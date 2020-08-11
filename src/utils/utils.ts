@@ -158,7 +158,7 @@ const getDeviceFp = (req, options) => {
   const cookieDecoded = decrypt(cookie, options.apiKey);
   const parsedToken = JSON.parse(cookieDecoded) || {};
   const clientFp = parsedToken.fp || '';
-  return clientFp.split('.')[1] || '';
+  return clientFp.split('.')[0] || '';
 };
 
 const promiseTimeout = (promise, ms) => {
