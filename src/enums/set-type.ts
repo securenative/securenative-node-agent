@@ -1,7 +1,7 @@
 export enum SetType {
   IP = "ip",
   PATH = "path",
-  USER = "user",
+  Device = "device",
   COUNTRY = "country"
 }
 

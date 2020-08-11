@@ -50,11 +50,11 @@ export default class HttpServerInterceptor extends Interceptor implements IInter
 
           if (
             ActionsList.whitelist.has(SetType.IP, clientIp) ||
-            ActionsList.whitelist.has(SetType.USER, deviceFP) ||
+            ActionsList.whitelist.has(SetType.Device, deviceFP) ||
             ActionsList.whitelist.has(SetType.PATH, url)
           ) {
             req.sn_whitelisted = true;
-          } else if (ActionsList.blackList.has(SetType.IP, clientIp) || ActionsList.blackList.has(SetType.USER, deviceFP)) {
+          } else if (ActionsList.blackList.has(SetType.IP, clientIp) || ActionsList.blackList.has(SetType.Device, deviceFP)) {
             super.intercept(snuid, 'block');
           }
           return true;
